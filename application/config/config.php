@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'localhost/mysite';
+$config['base_url']	= '//localhost/mysite';
 
 /*
 |--------------------------------------------------------------------------
