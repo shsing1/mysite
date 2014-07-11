@@ -37,7 +37,7 @@ class Admin extends Admin_Controller {
         $this->template->add_js(site_url('assets/js/jquery.fileupload.js'), TRUE);
         $this->template->add_js(site_url('assets/js/jquery.fileupload-jquery-ui.js'), TRUE);
         $this->template->add_js(site_url('config'), TRUE);
-        $this->template->add_js(site_url('assets/js/admin.init.js'), TRUE);
+        $this->template->add_js(site_url('assets/js/admin.js'), TRUE);
 
         // 設定後台需載入的css
         $this->template->add_css(site_url('assets/css/ui.jqgrid.css'));
@@ -47,6 +47,21 @@ class Admin extends Admin_Controller {
         $this->template->add_css(site_url('assets/css/admin.css'));
 
         $this->template->render('admin/index');
+    }
+
+    // 管理者登出
+    public function logout()
+    {
+        $this->flexi_auth->logout();
+
+        $result = array(
+                'error' => false
+            );
+        $data = array(
+                'result' => $result
+            );
+
+        $this->template->render('json', $data);
     }
 }
 

@@ -1,6 +1,6 @@
-/*global $, config, CKEDITOR, noty*/
+/*global jQuery, config, CKEDITOR, noty*/
 /*jslint browser : true, devel: true, regexp: true */
-$(function () {
+jQuery(document).ready(function ($) {
     'use strict';
     var win = $(window),
         // content = $('#content'),
@@ -9,85 +9,25 @@ $(function () {
         jqgrid_handler = {},
         my = {},
         processing,
-        west = $('#west');
+        body = $('#body'),
+        jstree_panel = $('#jstree_panel'),
+        main_content = $('#main_content');
 
-    $.ajaxSetup({
-        type: 'POST',
-        dataType: 'json',
-        /*complete: function(xhr, textStatus) {
-            //called when complete
-        },
-        success: function(data, textStatus, xhr) {
-            //called when successful
-        },
-        beforeSend: function () {
-            console.log(1);
-        },
-        success : function () {
-            console.log(2);
-        },
-        complete : function () {
-            console.log(3);
-        },*/
-        error: function(xhr) {
-            //called when there is an error
-            if (xhr.status !== 200) {
-                $.my_alert(xhr.statusText);
+    $('#logout').click(function (event) {
+        event.preventDefault();
+        var op = {};
+
+        op.url = config.base_url + '/admin/logout';
+        op.success = function (result) {
+            if (result.error) {
+                $.my_error(result.message);
+            } else {
+                location.reload();
             }
-        }
+        };
+
+        $.my_ajax(op, true);
     });
-
-    $.my_alert = function (message) {
-        var div = $('<div>');
-        div.attr({'title' : 'title'})
-            .append(message)
-            .dialog({
-                modal : true,
-                close: function () {
-                    console.log(this);
-                    div.dialog('destroy').remove();
-                }
-            });
-    };
-
-    my.information = function (message) {
-        var n;
-
-        n = noty({
-            layout: 'topCenter',
-            type: 'information',
-            text: message
-        });
-
-        return n;
-    };
-
-    my.success = function (message) {
-        var n;
-
-        n = noty({
-            layout: 'topCenter',
-            type: 'success',
-            text: message,
-            timeout: 3000
-        });
-
-        return n;
-    };
-
-    // my.information('processing');
-
-    /**
-     * [load_list_elm description]
-     * @return {[type]} [description]
-     */
-    // function load_list_elm() {
-    //     $.ajax({
-    //         'url' : config.base_url + 'admin/entity/list_elm'
-    //     });
-
-    // }
-    // load_list_elm();
 
     // 客製化jqgrid link
     $.extend($.fn.fmatter, {
@@ -98,12 +38,16 @@ $(function () {
     });
 
     // 設定主區塊高度
-    function set_east_height() {
-        var nh = $('#north').height(),
-            sh = $('#south').height();
-        $('#west').height(win.height() - nh - sh);
+    function set_body_height() {
+        var nh = $('#header').height(),
+            sh = $('#footer').height(),
+            h = win.height() - nh - sh;
+
+        body.height(h);
+        jstree_panel.height(h);
+        main_content.height(h);
     }
-    // set_east_height();
+    // set_body_height();
 
 
     /**
@@ -363,7 +307,7 @@ $(function () {
                     '<div id="jqGrid-pager"></div>' +
                 '</div>';
         div = $(html);
-        div.appendTo('#east');
+        div.appendTo('#main_content');
 
         // 格式化表單項目
         // jqgrid_handler.format_edittype(options);
@@ -440,7 +384,7 @@ $(function () {
                     '<div id="ptreegrid"></div>' +
                 '</div>';
         div = $(html);
-        div.appendTo('#west');
+        div.appendTo(jstree_panel);
         // options.loadComplete = loadComplete;
         // options.gridComplete = set_grid_width;
         div.find("#tree_menu").jqGrid(options);
@@ -456,9 +400,9 @@ $(function () {
     // 設定不換頁連結
     function set_address_link() {
         // Init and change handlers
-        $.address.init(function() {
+        $.address.init(function () {
             $('a:not([href^=http])').address();
-        }).bind('change', function(event) {
+        }).bind('change', function (event) {
             // Identifies the page selection
             // var handler;
 
@@ -471,7 +415,7 @@ $(function () {
                 // url: config.base_url + event.path,
                 url: config.base_url + event.path,
                 data : event.parameters,
-                success: function(data) {
+                success: function (data) {
                     ajax_handler(data);
                 }
             });
@@ -483,7 +427,7 @@ $(function () {
     window.init_menu = function () {
         $.ajax({
             url: 'backend_menu/tree',
-            success: function(data) {
+            success: function (data) {
                 ajax_handler(data);
             }
         });
@@ -510,9 +454,9 @@ $(function () {
     };
 
     // 載入後台左方選單
-    if (west.length === 1) {
+    if (jstree_panel.length === 1) {
         // window.init_menu();
-        $('#jstree_demo_div').jstree({
+        jstree_panel.jstree({
             'core' : {
                 // "themes" : { "stripes" : true, "dots" : false },
                 'data' : {
@@ -536,7 +480,7 @@ $(function () {
 
     // 視窗大小改變
     win.on('resize load', function () {
-        set_east_height();
+        set_body_height();
         set_grid_width();
     });
 });

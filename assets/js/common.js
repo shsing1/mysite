@@ -17,12 +17,16 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $.my_process = function () {
-        var n = noty({
+    $.my_process = function (msg) {
+        var message,
+            n;
+
+        message = msg || 'Process...';
+        n = noty({
             layout: 'topCenter',
             type: 'information',
             modal: true,
-            text: 'Process...',
+            text: message,
             closeWith: []
         });
         return n;

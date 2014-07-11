@@ -13,13 +13,11 @@ jQuery(document).ready(function ($) {
         op.data = form.serialize();
         op.success = function (result) {
             if (result.error) {
-                $.my_alert(result.message);
+                $.my_error(result.message);
             } else {
                 // $.success(result.message);
                 if (result.next_url) {
-                    setTimeout(function () {
-                        location.href = result.next_url;
-                    }, 3000);
+                    location.href = result.next_url;
                 }
             }
         };
