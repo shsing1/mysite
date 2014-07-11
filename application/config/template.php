@@ -4,15 +4,15 @@
  * default layout
  * Location: application/views/
  */
-$config['template_layout'] = 'admin/layout_json';
+$config['template_layout'] = 'admin/json_layout';
 
 /**
  * default css
  */
 $config['template_css'] = array(
     // 'http://reset5.googlecode.com/hg/reset.min.css' => 'screen',
-    'http://yui.yahooapis.com/3.14.1/build/cssreset/cssreset-min.css' => 'screen',
-    'http://code.jquery.com/ui/1.10.4/themes/redmond/jquery-ui.min.css' => 'screen'
+    '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' => 'screen',
+    '//code.jquery.com/ui/1.11.0/themes/redmond/jquery-ui.min.css' => 'screen'
     // 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/redmond/jquery-ui.min.css' => 'screen'
     // '/assets/css/index.css' => 'screen'
 );
@@ -23,9 +23,12 @@ $config['template_css'] = array(
  * load javascript on footer: TRUE
  */
 $config['template_js'] = array(
-    'http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js' => TRUE,
-    'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js' => TRUE,
-    'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js' => TRUE
+    '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js' => TRUE,
+    '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js' => TRUE,
+    '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/i18n/jquery-ui-i18n.min.js' => TRUE,
+    site_url('assets/js/jquery.noty.packaged.min.js') => TRUE,
+    // '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js' => TRUE,
+    site_url('assets/js/common.js') => TRUE
 );
 
 /**
@@ -39,7 +42,7 @@ $config['template_vars'] = array(
 /**
  * default site title
  */
-$config['base_title'] = 'xxxxx';
+$config['base_title'] = 'mysite';
 
 /**
  * default title separator

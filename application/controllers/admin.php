@@ -32,7 +32,7 @@ class Admin extends Admin_Controller {
         $this->template->add_js(site_url('assets/js/i18n/jquery-ui-timepicker-zh-TW.js'), TRUE);
         $this->template->add_js(site_url('assets/js/jquery.maskedinput.min.js'), TRUE);
         $this->template->add_js('//cdn.ckeditor.com/4.4.2/standard/ckeditor.js', TRUE);
-        $this->template->add_js(site_url('assets/js/jquery.noty.packaged.min.js'), TRUE);
+        // $this->template->add_js(site_url('assets/js/jquery.noty.packaged.min.js'), TRUE);
         $this->template->add_js(site_url('assets/js/jquery.iframe-transport.js'), TRUE);
         $this->template->add_js(site_url('assets/js/jquery.fileupload.js'), TRUE);
         $this->template->add_js(site_url('assets/js/jquery.fileupload-jquery-ui.js'), TRUE);

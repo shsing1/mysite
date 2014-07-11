@@ -51,9 +51,9 @@ class Admin_Controller extends MY_Controller {
         parent::__construct();
 
         // 檢查有無登入後台
-        if (! $this->admin_login())
+        if (!$this->admin_login())
         {
-            my_redirect('admin/login');
+            my_redirect('admin_guest/login');
         }
 
         // 載入jgrid fun
@@ -63,7 +63,14 @@ class Admin_Controller extends MY_Controller {
     // 檢查有無登入後台
     function admin_login()
     {
-        $bool = true;
+        $bool = false;
+
+        $this->auth = new stdClass;
+        $this->load->library('flexi_auth');
+
+        if ($this->flexi_auth->is_logged_in()) {
+            $bool = true;
+        }
 
         return $bool;
     }
@@ -78,19 +85,28 @@ class Admin_Controller extends MY_Controller {
 }
 
 /**
- * 後台瀏覽者
+ * 後台訪客
  */
-class Visitor_Controller extends MY_Controller {
+class Admin_Guest_Controller extends MY_Controller {
     function __construct()
     {
         parent::__construct();
+
+        if (!$this->input->is_ajax_request()) {
+            // 設定後台訪客layout
+            $this->template->set_layout('admin/guest_layout');
+        }
+
+        $this->template->add_css(site_url('assets/css/admin_guest.css'));
+
+        $this->template->add_js(site_url('assets/js/admin_guest.js'), true);
     }
 }
 
 /**
  * 前台瀏覽者
  */
-class User_Controller extends MY_Controller {
+class Guest_Controller extends MY_Controller {
     function __construct()
     {
         parent::__construct();

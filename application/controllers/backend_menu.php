@@ -43,7 +43,7 @@ class Backend_Menu extends Admin_Controller {
         $rs->fun = 'jqrid';
         $rs->options = $jgrid_options;
 
-        $data['json_data'] = $rs;
+        $data['result'] = $rs;
 
 		$this->template->render('json', $data);
 	}
@@ -67,7 +67,7 @@ class Backend_Menu extends Admin_Controller {
         }
 
         $rs = new stdClass;
-        $data['json_data'] = $info;
+        $data['result'] = $info;
 
         $this->template->render('json', $data);
     }
@@ -91,7 +91,7 @@ class Backend_Menu extends Admin_Controller {
             $rs = $this->post->delete($id);
         }
 
-        $data['json_data'] = $rs;
+        $data['result'] = $rs;
 
         $this->template->render('json', $data);
     }
@@ -116,7 +116,7 @@ class Backend_Menu extends Admin_Controller {
         $rs->fun = 'tree_menu';
         $rs->options = $jgrid_options;
 
-        $data['json_data'] = $rs;
+        $data['result'] = $rs;
 
         $this->template->render('json', $data);
     }
@@ -144,7 +144,7 @@ class Backend_Menu extends Admin_Controller {
         }
 
         $rs = new stdClass;
-        $data['json_data'] = $info->rows;
+        $data['result'] = $info->rows;
 
         $this->template->render('json', $data);
     }

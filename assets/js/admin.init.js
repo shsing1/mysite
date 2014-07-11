@@ -32,12 +32,12 @@ $(function () {
         error: function(xhr) {
             //called when there is an error
             if (xhr.status !== 200) {
-                my.alert(xhr.statusText);
+                $.my_alert(xhr.statusText);
             }
         }
     });
 
-    my.alert = function (message) {
+    $.my_alert = function (message) {
         var div = $('<div>');
         div.attr({'title' : 'title'})
             .append(message)
