@@ -4,34 +4,6 @@ body{
 .cb{
     clear: both;
 }
-#north{
-    height: 10%;
-}
-#south{
-    height: 10%;
-}
-#west{
-    float:left;
-    width:200px;
-}
-#east_wrap{
-    margin:0 0 0 200px;
-}
-#east{
-    margin-top: 20px;
-    width:100%;
-    float: left;
-}
-#header{
-    line-height: 4em;
-    text-align: right;
-    padding: 0 30px;
-}
-#copyright{
-    line-height: 4em;
-    text-align: right;
-    padding: 0 30px;
-}
 
 /* 修正jquery ui bug */
 .ui-widget-overlay{
@@ -40,10 +12,10 @@ body{
 
 /* jqgrid add notice */
 .FormGrid .notice{
-    color:#999999;
-    margin:1px 5px;
+    color: #999999;
+    margin: 1px 5px;
 }
 .EditTable .editor{
-    width:800px;
-    height:300px;
+    width: 800px;
+    height: 300px;
 }

@@ -54,8 +54,8 @@ jQuery(document).ready(function ($) {
      * 設定grid寬度
      */
     function set_grid_width() {
-        var ew = $('#east').width();
-        $("#jqGrid-table").jqGrid('setGridWidth', ew - 10);
+        var ew = main_content.width();
+        $("#jqGrid-table").jqGrid('setGridWidth', ew);
     }
     /**
      * 資料載入後處理後續動作
