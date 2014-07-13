@@ -87,11 +87,20 @@ jQuery(document).ready(function ($) {
     };
     // $.my_error('test');
 
+    $.process_ajax_response = function (result, callback) {
+        if (result.error) {
+            $.my_error(result.message);
+        } else if (result.redirect) {
+            location.href = result.redirect;
+        } else if (callback) {
+            callback();
+        }
+    };
+
+    // warp ajax
     $.my_ajax = function (op, mask) {
         var settings = {},
             process;
-
-        settings = $.extend(settings, op);
 
         if (mask) {
             process = $.my_process();
@@ -102,6 +111,11 @@ jQuery(document).ready(function ($) {
                 process.close();
             }
         };
+        settings.success = function (result) {
+            $.process_ajax_response(result);
+        };
+
+        settings = $.extend(settings, op);
 
         $.ajax(settings);
     };

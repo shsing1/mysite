@@ -2,3 +2,6 @@ RewriteEngine on
 RewriteBase /mysite/
 RewriteCond $1 !^(index\.php|assets|upload|images|robots\.txt|$)
 RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+SetOutputFilter DEFLATE
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip

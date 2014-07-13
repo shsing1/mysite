@@ -19,11 +19,9 @@ jQuery(document).ready(function ($) {
 
         op.url = config.base_url + '/admin/logout';
         op.success = function (result) {
-            if (result.error) {
-                $.my_error(result.message);
-            } else {
+            $.process_ajax_response(result, function () {
                 location.reload();
-            }
+            });
         };
 
         $.my_ajax(op, true);
@@ -390,11 +388,12 @@ jQuery(document).ready(function ($) {
         div.find("#tree_menu").jqGrid(options);
     };
 
-    function ajax_handler(rs) {
-        rs = rs || {};
-        if (rs.fun) {
-            handler_fun[rs.fun].call(this, rs.options);
-        }
+    function ajax_handler(result) {
+        $.process_ajax_response(result, function () {
+            if (result.fun) {
+                handler_fun[result.fun].call(this, result.options);
+            }
+        });
     }
 
     // 設定不換頁連結
@@ -415,8 +414,8 @@ jQuery(document).ready(function ($) {
                 // url: config.base_url + event.path,
                 url: config.base_url + event.path,
                 data : event.parameters,
-                success: function (data) {
-                    ajax_handler(data);
+                success: function (result) {
+                    ajax_handler(result);
                 }
             });
         });
@@ -427,8 +426,8 @@ jQuery(document).ready(function ($) {
     window.init_menu = function () {
         $.ajax({
             url: 'backend_menu/tree',
-            success: function (data) {
-                ajax_handler(data);
+            success: function (result) {
+                ajax_handler(result);
             }
         });
         /*treegrid.jqGrid({
